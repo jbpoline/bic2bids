@@ -33,19 +33,21 @@ protocols2fix.update({
             # TODO: more suffixes if we manage above^^^
             # ex: anat-T2star_acq-me_gre_0.7iso_ASPIRE
             # TODO: if produces multiple nifti -- we might need to add heudiconv postprocessing
-            (f'^anat-T2star_acq_me_.*ASPIRE', r'anat-T2starw_acq-aspire'),
+            (f'^anat-T2star_acq[-_]me_.*ASPIRE', r'anat-T2starw_acq-aspire'),
             #
             # Functionals
             # TODO: split mag|phase for 13,14-func-cross_acq-ep2d_MJC_19mm  https://github.com/nipy/heudiconv/issues/836
             (f'^func-cross_', r'func_task-rest_'),
             (f'^func-([a-z0-9]*)_.*', r'func_task-\1'),
+            (f'_acq-ep2d_MJC_19mm', ''),
             #
             # Fieldmaps
+            # ex: fmap-b1_tra_p2 -- 4 of those with no differences in series description
             (f'^fmap-b1_tra_p2', 'fmap-TB1TFL'),  # TODO: https://github.com/nipy/heudiconv/issues/835
             (f'^fmap-fmri_.*_dir-{directions_re}', r'fmap-epi_acq-fmri_dir-\1'),
             # ex: dwi_acq_multib_38dir_AP_acc9
             # ex: dwi_acq_multib_70dir_AP_acc9
-            (f'^dwi_acq_(multib[0-9]+)_({directions_re})_acc[0-9]', r'dwi_acq-\1_dir-\2'),
+            (f'^dwi_acq_multib_([0-9]+)dir_({directions_re})_acc[0-9]', r'dwi_acq-multib\1_dir-\2'),
             (f'^dwi_acq_b0_{directions_re}', r'dwi_acq-b0_dir-\1'),
             # TODO: do more from https://github.com/BIC-MNI/MNI_7T_DICOM_to_BIDS/
         ],
