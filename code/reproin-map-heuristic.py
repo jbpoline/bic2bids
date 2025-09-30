@@ -28,7 +28,7 @@ protocols2fix.update({
             # First to mape prefix
             (f'^anat-T1w_acq-mp2rage_0.7mm_CSptx', r'anat-MP2RAGE'),
             # and then I try to map suffix into inv etc
-            # TODO: add to reproin!!! (I think)
+            # TODO: add to reproin!!! (I think) https://github.com/nipy/heudiconv/issues/837
             (f'^(anat-MP2RAGE)_INV([0-9])', r'\1_inv-\2'),
             # TODO: more suffixes if we manage above^^^
             # ex: anat-T2star_acq-me_gre_0.7iso_ASPIRE
